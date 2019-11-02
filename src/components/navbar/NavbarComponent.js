@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Navbar } from 'react-bootstrap';
 import ModeSwitch from './ModeSwitch';
+import ShapeSwitch from './ShapeSwitch';
+
 class NavbarComponent extends Component {
     render() {
         return (
@@ -20,6 +22,10 @@ class NavbarComponent extends Component {
                     {/* </Navbar.Brand> */}
                     <div>
                         <ModeSwitch></ModeSwitch>
+                    </div>
+
+                    <div>
+                        <ShapeSwitch></ShapeSwitch>
                     </div>
                 </Navbar>
             </div>
