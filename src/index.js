@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createStore } from 'redux';
+import { createStore,combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import modeSwitchReducer from './reducers/modeSwitchReducer';
+import shapeSwitchReducer from './reducers/shapeSwitchReducer';
 
-const store = createStore(modeSwitchReducer)
+
+
+const allReduceres=combineReducers({
+    shapeSwitch:shapeSwitchReducer,
+    modeSwitch:modeSwitchReducer
+})
+
+const store = createStore(allReduceres)
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

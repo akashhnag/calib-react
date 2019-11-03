@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar } from 'react-bootstrap';
+import { Navbar,Container,Row,Col } from 'react-bootstrap';
 import ModeSwitch from './ModeSwitch';
 import ShapeSwitch from './ShapeSwitch';
 
@@ -9,24 +9,37 @@ class NavbarComponent extends Component {
             <div>
 
                 <Navbar bg="dark" variant="dark">
-                    {/* //<Navbar.Brand href="#home"> */}
-                    <img
-                        alt=""
-                        src="/logo.svg"
-                        width="30"
-                        height="30"
-                        className="d-inline-block align-top"
-                    />{' '}
-                    <div>React Bootstrap</div>
-
-                    {/* </Navbar.Brand> */}
                     <div>
-                        <ModeSwitch></ModeSwitch>
-                    </div>
+                    {/* <Container fluid={true}>
+                        <Row className='show-grid'>
+                            <Col>
+                            
+                            </Col>
+                            <Col>
+                            <div> </div>
+                            </Col>
+                            <Col>
+                            <div></div>
+                            </Col>
+                        </Row>
+                    </Container> */}
+                    <div className='container-fluid'>
+                        <div className='row'>
+                            <div className='col'>
+                            <div>React Bootstrap</div>
+                            </div>
+                            <div className='col'>
+                            <ModeSwitch></ModeSwitch>
+                            </div>
+                            <div className='col'>
+                            <ShapeSwitch></ShapeSwitch>
+                            </div>
+                        </div>
 
-                    <div>
-                        <ShapeSwitch></ShapeSwitch>
                     </div>
+                    </div>
+                    
+                          
                 </Navbar>
             </div>
         )
