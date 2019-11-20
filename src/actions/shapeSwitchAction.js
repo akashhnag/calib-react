@@ -1,8 +1,8 @@
-export default function shapeSwitch(shape){
-    return(
+export default function shapeSwitch(shape) {
+    return (
         {
-            type:'SWITCH_SHAPE',
-            payload:shape
+            type: 'SWITCH_SHAPE',
+            payload: shape
         }
     )
 }

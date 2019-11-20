@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import shapeSwitchAction from '../../actions/shapeSwitchAction';
 
 class ShapeSwitch extends Component {
@@ -15,8 +15,8 @@ class ShapeSwitch extends Component {
         }
     }
 
-    assignProps() {
-        this.props.currentShape(this.state)
+    assignProps(shape) {
+        this.props.currentShape(shape)
     }
 
     buttonClick = (e) => {
@@ -27,12 +27,12 @@ class ShapeSwitch extends Component {
                     calibration: '',
                     zone: '',
                     direction: ''
-                },this.assignProps)
+                }, this.assignProps(e.target.value))
             }
             else {
                 this.setState({
                     line: ''
-                },this.assignProps);
+                });
             }
                 break;
             case 'calibration': if (this.state.calibration === '') {
@@ -41,12 +41,12 @@ class ShapeSwitch extends Component {
                     calibration: 'active',
                     zone: '',
                     direction: ''
-                },this.assignProps)
+                }, this.assignProps(e.target.value))
             }
             else {
                 this.setState({
                     calibration: ''
-                },this.assignProps);
+                });
             }
                 break;
             case 'zone': if (this.state.zone === '') {
@@ -55,12 +55,12 @@ class ShapeSwitch extends Component {
                     calibration: '',
                     zone: 'active',
                     direction: ''
-                },this.assignProps)
+                }, this.assignProps(e.target.value))
             }
             else {
                 this.setState({
                     zone: ''
-                },this.assignProps);
+                });
             }
                 break;
             case 'direction': if (this.state.direction === '') {
@@ -69,16 +69,17 @@ class ShapeSwitch extends Component {
                     calibration: '',
                     zone: '',
                     direction: 'active'
-                },this.assignProps)
+                }, this.assignProps(e.target.value))
             }
             else {
                 this.setState({
                     direction: ''
-                },this.assignProps);
+                });
             }
                 break;
         }
     }
+
     render() {
         return (
             <div>
@@ -97,9 +98,9 @@ class ShapeSwitch extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        currentShape:shapeSwitchAction
-    },dispatch)
+        currentShape: shapeSwitchAction
+    }, dispatch)
 }
-export default connect(null,mapDispatchToProps)(ShapeSwitch)
+export default connect(null, mapDispatchToProps)(ShapeSwitch)

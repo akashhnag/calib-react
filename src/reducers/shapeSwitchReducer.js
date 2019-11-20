@@ -1,17 +1,19 @@
-let initialState={
-    line: '',
-    calibration: '',
-    zone: '',
-    direction: ''
+let initialState = {
+    shape: ''
 }
 
-export default function shapeSwitchReducer(state=initialState,action){
-    switch(action.type){
+export default function shapeSwitchReducer(state = initialState, action) {
+    switch (action.type) {
         case 'SWITCH_SHAPE':
-            return{
-                ...state,
-                state:action.payload
-            }
-            default:return state;
+            return (
+                {
+                    ...state,
+                    shape: action.payload
+                }
+
+            )
+
+
+        default: return state;
     }
 }
