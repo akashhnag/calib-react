@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 class LineComponent extends Component {
+
+    delete = (e) => {
+        console.log('delte', e.target.getAttribute('data-value'));
+
+    }
     render() {
         console.log('props', this.props.lineDetails);
         //return (null)
@@ -19,10 +24,13 @@ class LineComponent extends Component {
                         return (
                             <div key={ele.name}>
                                 {ele.name}
+                                {'     '}
+                                <span className='glyphicon glyphicon-trash' onClick={this.delete} data-value={ele.name}>Del</span>
                                 {ele.coods.map((ele1, ind1) => {
                                     return (
                                         <div key={ind1}>
-                                            {ele1.x} {ele1.y}
+                                            x{ind1 + 1}:{ele1.x} y{ind1 + 1}:{ele1.y}
+
                                         </div>
                                     )
                                 })}
