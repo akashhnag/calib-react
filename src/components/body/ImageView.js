@@ -41,6 +41,8 @@ class ImageView extends Component {
                 case 'line': if (clicks < 2) {
                     this.drawCircle(x, y, svg);
                     lineData.push({ x: x, y: y });
+                    console.log('line data', lineData);
+
                     clicks++;
                     if (clicks == 2) {
                         this.props.drawAction({
@@ -82,7 +84,7 @@ class ImageView extends Component {
                     )}
                 </Dropzone>
                 <img src={this.props.drawDetails.imageURL}></img>
-                <svg className='border mt-5' width='400px' height='400px' onClick={this.svgClicked} >
+                <svg className='border mt-5' width='800px' height='400px' onClick={this.svgClicked} >
 
                 </svg>
             </div>

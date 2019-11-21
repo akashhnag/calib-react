@@ -1,3 +1,5 @@
+import { stat } from "fs"
+
 let initialState = {
     imageURL: '../public/plotted.jpg',
     lineData: [],
@@ -7,15 +9,14 @@ let initialState = {
 }
 
 export default function drawReducer(state = initialState, action) {
-    console.log('payload', action.payload);
-    console.log('state in red', state);
+    console.log("State changes ", state, action);
 
     switch (action.type) {
         case 'LINE_POINTS':
             return (
                 {
                     ...state,
-                    lineData: action.payload
+                    lineData: [...action.payload]
                 }
 
             )

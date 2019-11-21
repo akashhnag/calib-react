@@ -9,20 +9,20 @@ function App() {
     <div className='container-fluid p-0'>
       <div className='row'>
         <div className='col'>
-        <NavbarComponent></NavbarComponent>
+          <NavbarComponent></NavbarComponent>
         </div>
       </div>
 
       <div className='row'>
         <div className='col-8'>
-        <WorkArea></WorkArea>
+          <WorkArea></WorkArea>
         </div>
         <div className='col-4'>
-        <ControlPanel></ControlPanel>
+          <ControlPanel></ControlPanel>
         </div>
       </div>
 
-     
+
     </div>
   );
 }
