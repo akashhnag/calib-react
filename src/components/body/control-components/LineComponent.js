@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 class LineComponent extends Component {
     render() {
         console.log('props', this.props.lineDetails);
-
+        //return (null)
         if (this.props.lineDetails.length === 0) {
             return (
                 <div>
@@ -15,12 +15,21 @@ class LineComponent extends Component {
             return (
                 <div>
                     {this.props.lineDetails.map((ele, ind) => {
+                        console.log(ele);
                         return (
-                            <div key={ele.x}>
-                                x{ind + 1}={ele.x}; y{ind + 1}={ele.y}
+                            <div key={ele.name}>
+                                {ele.name}
+                                {ele.coods.map((ele1, ind1) => {
+                                    return (
+                                        <div key={ind1}>
+                                            {ele1.x} {ele1.y}
+                                        </div>
+                                    )
+                                })}
                             </div>
-
                         )
+
+
                     })}
                 </div>
             )

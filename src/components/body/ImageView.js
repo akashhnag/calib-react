@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import drawAction from '../../actions/drawAction';
 
-let clicks = 0; let lineData = []
+let clicks = 0; let lineData = []; let num = 0; let result = { name: '', coods: [], type: '' };
 class ImageView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            lineData: []
         }
     }
 
@@ -40,18 +40,21 @@ class ImageView extends Component {
             switch (currentShape) {
                 case 'line': if (clicks < 2) {
                     this.drawCircle(x, y, svg);
-                    lineData.push({ x: x, y: y });
+                    //console.log(x, y);
+
+                    result.coods.push({ x: x, y: y });
                     console.log('line data', lineData);
+
 
                     clicks++;
                     if (clicks == 2) {
-                        this.props.drawAction({
-                            shape: currentShape,
-                            coods: lineData
-                        })
-                        clicks = 0;
-                        //lineData = [];
+                        result.name = 'Line' + ++num;
+                        result.shape = currentShape;
+                        console.log('result', result);
 
+                        this.props.drawAction(result)
+                        clicks = 0;
+                        result.coods = [];
                     }
 
                 }

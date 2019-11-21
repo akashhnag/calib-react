@@ -1,0 +1,2 @@
+1) Key used to render details are temporary solution.
+2) try achieving things using state instead of global variable.

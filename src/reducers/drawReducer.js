@@ -9,14 +9,14 @@ let initialState = {
 }
 
 export default function drawReducer(state = initialState, action) {
-    console.log("State changes ", state, action);
+    console.log('state in reducer', state);
 
     switch (action.type) {
         case 'LINE_POINTS':
             return (
                 {
                     ...state,
-                    lineData: [...action.payload]
+                    lineData: [...state.lineData, action.payload]
                 }
 
             )
