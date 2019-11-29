@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import deleteAction from '../../../actions/deleteAction';
+import highlightAction from '../../../actions/highlightAction';
+
 class LineComponent extends Component {
 
     delete = (e) => {
         console.log('delte', e.target.getAttribute('data-value'));
-
+        this.props.deleteAction({
+            shape: 'line',
+            index: parseInt(e.target.getAttribute('data-value'))
+        })
     }
+
+    lineClicked = (e) => {
+        console.log('line clicked', e.target.getAttribute('data-value'));
+        this.props.highlightAction({
+            shape: 'line',
+            index: e.target.getAttribute('data-value')
+        })
+    }
+
     render() {
         console.log('props', this.props.lineDetails);
         //return (null)
@@ -23,9 +39,9 @@ class LineComponent extends Component {
                         console.log(ele);
                         return (
                             <div key={ele.name}>
-                                {ele.name}
+                                <p onClick={this.lineClicked} data-value={ele.name}>{ele.name}</p>
                                 {'     '}
-                                <span className='glyphicon glyphicon-trash' onClick={this.delete} data-value={ele.name}>Del</span>
+                                <span className='glyphicon glyphicon-trash' onClick={this.delete} data-value={ind}>Del</span>
                                 {ele.coods.map((ele1, ind1) => {
                                     return (
                                         <div key={ind1}>
@@ -36,8 +52,6 @@ class LineComponent extends Component {
                                 })}
                             </div>
                         )
-
-
                     })}
                 </div>
             )
@@ -48,7 +62,13 @@ class LineComponent extends Component {
 }
 function mapStateToProps(state) {
     return {
-        lineDetails: state.draw.lineData
+        lineDetails: state.draw.lineData,
     }
 }
-export default connect(mapStateToProps)(LineComponent)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        deleteAction: deleteAction,
+        highlightAction: highlightAction
+    }, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(LineComponent)

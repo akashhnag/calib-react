@@ -2,7 +2,7 @@ export default function deleteAction(data) {
     switch (data.shape) {
         case 'line': return (
             {
-                type: 'DELETE_LINE',
+                type: 'HIGHLIGHT_LINE',
                 payload: data.index
             }
         )

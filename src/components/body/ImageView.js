@@ -6,6 +6,8 @@ import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import drawAction from '../../actions/drawAction';
+import plotted from '../../plotted.jpg';
+import '../../css/style.css';
 
 let clicks = 0; let lineData = []; let num = 0; let result = { name: '', coods: [], type: '' };
 class ImageView extends Component {
@@ -26,11 +28,21 @@ class ImageView extends Component {
             .attr('fill', 'black');
     }
 
+    drawLine = (x1, y1, x2, y2, svg) => {
+        let line = svg
+            .append('line')
+            //.attr('class', 'highlight')
+            .attr('x1', x1)
+            .attr('y1', y1)
+            .attr('x2', x2)
+            .attr('y2', y2)
+            .attr('stroke-width', 1)
+            .attr('stroke', 'blue');
+    }
+
 
     svgClicked = (event) => {
         let currentShape = this.props.shapeDetails.shape;
-
-
         if (currentShape != '') {
             //getting positions
             let svg = d3.select('svg');
@@ -40,31 +52,20 @@ class ImageView extends Component {
             switch (currentShape) {
                 case 'line': if (clicks < 2) {
                     this.drawCircle(x, y, svg);
-                    //console.log(x, y);
-
                     result.coods.push({ x: x, y: y });
-                    console.log('line data', lineData);
-
-
                     clicks++;
                     if (clicks == 2) {
+                        console.log('result', result.coods);
+                        this.drawLine(result.coods[0].x, result.coods[0].y, result.coods[1].x, result.coods[1].y, svg)
                         result.name = 'Line' + ++num;
                         result.shape = currentShape;
-                        console.log('result', result);
-
                         this.props.drawAction(result)
                         clicks = 0;
                         result.coods = [];
                     }
-
                 }
             }
-
-
-
-
         }
-
     }
 
     sendRequest = () => {
@@ -73,6 +74,25 @@ class ImageView extends Component {
 
 
     render() {
+        console.log('props in image view', this.props);
+        if (this.props.drawDetails.hasOwnProperty('highlightLine')) {
+            let x1 = this.props.drawDetails.highlightLine[0].x;
+            let y1 = this.props.drawDetails.highlightLine[0].y;
+            let x2 = this.props.drawDetails.highlightLine[1].x;
+            let y2 = this.props.drawDetails.highlightLine[1].y;
+            $('.highlight').remove();
+            let svg = d3.select('svg');
+            let line = svg
+                .append('line')
+                .attr('class', 'highlight')
+                .attr('x1', x1)
+                .attr('y1', y1)
+                .attr('x2', x2)
+                .attr('y2', y2)
+                .attr('stroke-width', 4)
+                .attr('stroke', 'blue');
+        }
+
         return (
             <div>
                 <p><button onClick={this.sendRequest}>send</button></p>
@@ -86,10 +106,11 @@ class ImageView extends Component {
                         </section>
                     )}
                 </Dropzone>
-                <img src={this.props.drawDetails.imageURL}></img>
-                <svg className='border mt-5' width='800px' height='400px' onClick={this.svgClicked} >
+                <div className='wrapper mt-5'>
+                    <img className='imageCarrier' src={plotted} width='800px' height='400px'></img>
+                    <svg className='svgCarrier border' width='800px' height='400px' onClick={this.svgClicked} ></svg>
+                </div>
 
-                </svg>
             </div>
         )
     }

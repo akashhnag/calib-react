@@ -11,7 +11,8 @@ class ShapeSwitch extends Component {
             line: '',
             calibration: '',
             zone: '',
-            direction: ''
+            direction: '',
+            rectangle: ''
         }
     }
 
@@ -20,13 +21,16 @@ class ShapeSwitch extends Component {
     }
 
     buttonClick = (e) => {
+        console.log(e.target.value);
+
         switch (e.target.value) {
             case 'line': if (this.state.line === '') {
                 this.setState({
                     line: 'active',
                     calibration: '',
                     zone: '',
-                    direction: ''
+                    direction: '',
+                    rectangle: ''
                 }, this.assignProps(e.target.value))
             }
             else {
@@ -40,7 +44,8 @@ class ShapeSwitch extends Component {
                     line: '',
                     calibration: 'active',
                     zone: '',
-                    direction: ''
+                    direction: '',
+                    rectangle: ''
                 }, this.assignProps(e.target.value))
             }
             else {
@@ -54,7 +59,8 @@ class ShapeSwitch extends Component {
                     line: '',
                     calibration: '',
                     zone: 'active',
-                    direction: ''
+                    direction: '',
+                    rectangle: ''
                 }, this.assignProps(e.target.value))
             }
             else {
@@ -68,12 +74,30 @@ class ShapeSwitch extends Component {
                     line: '',
                     calibration: '',
                     zone: '',
-                    direction: 'active'
+                    direction: 'active',
+                    rectangle: ''
                 }, this.assignProps(e.target.value))
             }
             else {
                 this.setState({
                     direction: ''
+                });
+            }
+                break;
+            case 'rectangle': if (this.state.direction === '') {
+                console.log('in rectangle');
+
+                this.setState({
+                    line: '',
+                    calibration: '',
+                    zone: '',
+                    direction: '',
+                    rectangle: 'active'
+                }, this.assignProps(e.target.value))
+            }
+            else {
+                this.setState({
+                    rectangle: ''
                 });
             }
                 break;
@@ -92,6 +116,8 @@ class ShapeSwitch extends Component {
                         onClick={this.buttonClick} value='zone'>Zone</Button>
                     <Button variant="secondary" className={this.state.direction}
                         onClick={this.buttonClick} value='direction'>Direction</Button>
+                    <Button variant="secondary" className={this.state.rectangle}
+                        onClick={this.buttonClick} value='rectangle'>Rectangle</Button>
                 </ButtonGroup>
             </div>
         )
